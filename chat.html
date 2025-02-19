@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Commune Rooms</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            text-align: center;
+        }
+        .popup {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+        }
+        .popup-content {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            width: 400px;
+            max-width: 100%;
+        }
+        .chat-box {
+            height: 300px;
+            overflow-y: auto;
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-bottom: 20px;
+        }
+        .message {
+            margin-bottom: 10px;
+        }
+        .message input {
+            width: 90%;
+            padding: 5px;
+            margin-right: 10px;
+        }
+        .message button {
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+        .reaction-buttons {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Welcome to Commune Rooms</h1>
+    <input type="text" id="chat-code" placeholder="Enter room code" />
+    <button onclick="joinChat()">Join Chat</button>
+</div>
+
+<div class="popup" id="chat-popup">
+    <div class="popup-content">
+        <div class="chat-box" id="chat-box">
+            <!-- Messages will be appended here -->
+        </div>
+        <div class="message">
+            <input type="text" id="message-input" placeholder="Type a message..." />
+            <button onclick="sendMessage()">Send</button>
+        </div>
+        <div class="reaction-buttons">
+            <button onclick="sendReaction('👍')">👍</button>
+            <button onclick="sendReaction('❤️')">❤️</button>
+            <button onclick="sendReaction('😂')">😂</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    function joinChat() {
+        const code = document.getElementById('chat-code').value;
+        if (code === '1234') {  // Dummy code for now
+            document.getElementById('chat-popup').style.display = 'flex';
+        } else {
+            alert('Invalid code!');
+        }
+    }
+
+    function sendMessage() {
+        const messageInput = document.getElementById('message-input');
+        const message = messageInput.value;
+        if (message.trim() === '') return;
+
+        const messageElement = document.createElement('div');
+        messageElement.textContent = message;
+        document.getElementById('chat-box').appendChild(messageElement);
+        messageInput.value = '';
+        messageInput.focus();
+    }
+
+    function sendReaction(emoji) {
+        const reactionElement = document.createElement('div');
+        reactionElement.textContent = emoji;
+        document.getElementById('chat-box').appendChild(reactionElement);
+    }
+</script>
+
+</body>
+</html>
