@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Commune Room</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            text-align: center;
+        }
+        input, button {
+            margin-top: 10px;
+            padding: 10px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Create a New Commune Room</h1>
+    <button onclick="startNewChat()">Start New Chat</button>
+
+    <h2>Or Join an Existing Room</h2>
+    <input type="text" id="existing-code" placeholder="Enter room code">
+    <button onclick="joinExistingChat()">Join Chat</button>
+
+    <p id="new-chat-code" style="font-size: 18px; font-weight: bold; color: green;"></p>
+</div>
+
+<script>
+    function startNewChat() {
+        const newCode = Math.floor(1000 + Math.random() * 9000); // Generates a random 4-digit code
+        document.getElementById('new-chat-code').textContent = `Your Chat Code: ${newCode}`;
+        localStorage.setItem('chatCode', newCode); // Store the code temporarily
+    }
+
+    function joinExistingChat() {
+        const enteredCode = document.getElementById('existing-code').value;
+        if (enteredCode.trim() === '') {
+            alert('Please enter a valid chat code.');
+            return;
+        }
+        localStorage.setItem('chatCode', enteredCode); // Store for later use
+        window.location.href = 'chat.html'; // Redirect to chat.html
+    }
+</script>
+
+</body>
+</html>
